@@ -1,0 +1,22 @@
+FROM ubuntu:22.04
+
+# Set the working directory
+WORKDIR /app
+
+# Install Python and pip
+RUN apt-get update && apt-get install -y python3 python3-pip
+
+# Copy all application files to the container
+COPY . .
+
+# Install dependencies
+RUN pip3 install -r requirements.txt
+
+# Set environment variables
+ENV FLASK_RUN_HOST=0.0.0.0
+
+# Expose the application port
+EXPOSE 5000
+
+# Run the application
+CMD ["python3", "app.py"]
